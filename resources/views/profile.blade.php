@@ -1,15 +1,15 @@
 
 @extends('layout.header')
 @section(section: 'akun');
-  <div class="container mt-4 mb-5">
+ <div class="container mt-4 mb-5">
     <h3 class="fw-bold text-center mb-4">Akun</h3>
-
     <!-- Profile Card -->
     <div class="card shadow-sm card-profile p-4 mb-4">
       <div class="d-flex align-items-center">
         <div class="me-3">
           <div class="rounded-circle bg-warning d-flex justify-content-center align-items-center" style="width:70px; height:70px; font-size:32px; font-weight:bold; color:white;">
-            A
+        {{ substr($user->name, 0, 1) }}
+
           </div>
         </div>
         <div>
@@ -34,5 +34,6 @@
       <a href="{{ route('logout') }}" class="btn btn-logout w-100 mb-4">Logout</a>
     </div>
   </div>
+
 
   @endsection

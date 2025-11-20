@@ -2,27 +2,37 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    if (Auth::check()) {
-        return redirect('/dashboard');
+
+Route::get('/',function(){
+    if(Auth::check()){
+        return redirect()->route('dashboard');
     }
-    return view('login',[ 'title' => 'Kereta Api Indonesia','host'=>request()->getHost() ]);
+    return view('login',[
+        'title' => 'Kereta Api Indonesia',
+        'host' => 'http://kai.go.id'
+    ]);
+});
+Route::get('/login', function () {
+    return view('login', [
+        'title' => 'Kereta Api Indonesia',
+        'host' => 'http://kai.go.id'
+    ]);
 })->name('login');
 
 Route::post('/register', [AuthController::class, 'register'])->name('register');
-Route::post('/login', [AuthController::class, 'login'])->name('login');
+Route::post('/login', [AuthController::class, 'login'])->name('login.process');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware('auth')
     ->name('dashboard');
-Route::get('/akun', [DashboardController::class, 'profile'])
+Route::get('/profile', [DashboardController::class, 'profile'])
     ->middleware('auth')
     ->name('profile');
-
 Route::get('/tes',function(){
-    return view('test');
+    return view('welcome');
 });
 
 

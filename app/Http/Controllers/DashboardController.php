@@ -10,7 +10,7 @@ class DashboardController extends Controller
     {
 
         if(!Auth::check()){
-            return redirect();
+            return redirect()->route('login');
         }
         return view('dashboard',['user' => Auth::user()]);
 

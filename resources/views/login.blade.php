@@ -44,7 +44,7 @@
       <form id="registerForm" method="POST">
          @csrf
         <img src="{{ asset('image/kai.png') }}" class="logo" alt="KAI Logo">
-        <h3 class="title">Daftar KAI</h3>
+        <h3 class="title">{{ $title }}</h3>
 
         <div class="mb-3">
           <label class="form-label">Nama Lengkap</label>
