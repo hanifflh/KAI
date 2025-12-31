@@ -22,14 +22,7 @@ class AuthController extends Controller
                     }
                 },
             ],
-            'phone'    => [
-                'required',
-                function ($attribute, $value, $fail) {
-                    if (!preg_match('/^(?:\+62|62|0)8[1-9][0-9]{7,10}$/', $value)) {
-                        $fail('Nomor HP tidak valid. Gunakan format +628xx atau 08xx');
-                    }
-                },
-            ],
+
             'password' => 'required|min:6|confirmed',
         ]);
 
@@ -40,17 +33,11 @@ class AuthController extends Controller
             ], 400);
         }
 
-        if (User::where('phone', $request->phone)->exists()) {
-            return response()->json([
-                'success' => false,
-                'message' => 'Maaf, nomor HP sudah terdaftar. Silakan gunakan nomor lain.'
-            ], 400);
-        }
+
 
         User::create([
             'name'     => $request->name,
             'email'    => $request->email,
-            'phone'    => $request->phone,
             'password' => Hash::make($request->password),
         ]);
 
